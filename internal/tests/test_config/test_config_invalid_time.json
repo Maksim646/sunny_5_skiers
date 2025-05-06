@@ -1,0 +1,9 @@
+{
+    "laps": 2,
+    "lap_len": 3500,
+    "penalty_len": 150,
+    "firing_lines": 2,
+    "start": "invalid_time",
+    "start_delta": "00:01:30"
+  }
+  

@@ -58,7 +58,7 @@ func formatEventWithComment(event model.CompetitorEvent, comments map[int]string
 		msg = fmt.Sprintf("Unknown event ID (%d) for competitor(%d)", event.ID, event.Competitor)
 	}
 
-	return fmt.Sprintf("%s %s", timeStr, msg)
+	return fmt.Sprintf("[%s] %s", timeStr, msg)
 }
 
 func GenerateResultingTable(events []model.CompetitorEvent, resultTablePath string, timeFormat string, config model.Config, targetsInFireLine int) error {
