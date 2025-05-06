@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/Maksim646/sunny_5_skiers/config"
-	"github.com/Maksim646/sunny_5_skiers/internal/handler"
+	"github.com/Maksim646/sunny_5_skiers/internal/controller"
 	logger "github.com/Maksim646/sunny_5_skiers/pkg"
 	"github.com/kelseyhightower/envconfig"
 	"go.uber.org/zap"
@@ -17,22 +17,22 @@ func main() {
 	defer zap.L().Sync()
 	zap.L().Info("Logger started")
 
-	parsedConfig, err := handler.ParseConfig(cfg.ConfigPath, cfg.TimeFormat, cfg.TimeDurationFormat)
+	parsedConfig, err := controller.ParseConfig(cfg.ConfigPath, cfg.TimeFormat, cfg.TimeDurationFormat)
 	if err != nil {
 		zap.L().Error("error load config", zap.Error(err))
 	}
 
-	events, err := handler.ParseEvents(cfg.EventsPath, cfg.TimeFormat)
+	events, err := controller.ParseEvents(cfg.EventsPath, cfg.TimeFormat)
 	if err != nil {
 		zap.L().Error("error parse events", zap.Error(err))
 	}
 
-	err = handler.ProcessEvents(events, cfg.OutputFilePath, cfg.TimeFormat)
+	err = controller.ProcessEvents(events, cfg.OutputFilePath, cfg.TimeFormat)
 	if err != nil {
 		zap.L().Error("error process events", zap.Error(err))
 	}
 
-	err = handler.GenerateResultingTable(events, cfg.ResultTablePath, cfg.ReportTableTimeFormat, parsedConfig, cfg.TargetsInFireLine)
+	err = controller.GenerateResultingTable(events, cfg.ResultTablePath, cfg.ReportTableTimeFormat, parsedConfig, cfg.TargetsInFireLine)
 	if err != nil {
 		zap.L().Error("error process events", zap.Error(err))
 	}

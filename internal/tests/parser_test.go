@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Maksim646/sunny_5_skiers/internal/handler"
+	"github.com/Maksim646/sunny_5_skiers/internal/controller"
 	"github.com/Maksim646/sunny_5_skiers/model"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -14,7 +14,7 @@ import (
 
 func TestParseConfig(t *testing.T) {
 	t.Run("Valid config", func(t *testing.T) {
-		config, err := handler.ParseConfig("test_config/test_config.json", "15:04:05.000", "15:04:05")
+		config, err := controller.ParseConfig("test_config/test_config.json", "15:04:05.000", "15:04:05")
 		assert.NoError(t, err)
 
 		startTime, _ := time.Parse("15:04:05.000", "10:00:00.000")
@@ -34,13 +34,13 @@ func TestParseConfig(t *testing.T) {
 	})
 
 	t.Run("Non-existent config file", func(t *testing.T) {
-		_, err := handler.ParseConfig("nonexistent.json", "15:04:05.000", "15:04:05")
+		_, err := controller.ParseConfig("nonexistent.json", "15:04:05.000", "15:04:05")
 		assert.Error(t, err)
 		t.Logf("Expected error for missing config file: %v", err)
 	})
 
 	t.Run("Invalid time format in config", func(t *testing.T) {
-		_, err := handler.ParseConfig("test_config/test_config_invalid_time.json", "15:04:05.000", "15:04:05")
+		_, err := controller.ParseConfig("test_config/test_config_invalid_time.json", "15:04:05.000", "15:04:05")
 		assert.Error(t, err)
 		t.Logf("Expected error for invalid time format in config: %v", err)
 	})
@@ -50,7 +50,7 @@ func TestParseConfig(t *testing.T) {
 func TestParseEvents(t *testing.T) {
 	timeFormat := "15:04:05.000"
 	t.Run("Valid events", func(t *testing.T) {
-		events, err := handler.ParseEvents("test_events/test_events_valid", timeFormat)
+		events, err := controller.ParseEvents("test_events/test_events_valid", timeFormat)
 		if err != nil {
 			t.Errorf("Error parsing events: %v", err)
 			return
@@ -94,13 +94,13 @@ func TestParseEvents(t *testing.T) {
 	})
 
 	t.Run("NonExistentDirectory", func(t *testing.T) {
-		_, err := handler.ParseEvents("not_exist", timeFormat)
+		_, err := controller.ParseEvents("not_exist", timeFormat)
 		assert.Error(t, err)
 	})
 
 	t.Run("EmptyDirectory", func(t *testing.T) {
 		dir := "test_events/test_events_empty"
-		events, err := handler.ParseEvents(dir, timeFormat)
+		events, err := controller.ParseEvents(dir, timeFormat)
 		assert.NoError(t, err)
 		assert.Empty(t, events, "Expected no events from empty directory")
 	})
@@ -112,7 +112,7 @@ func TestParseEvents(t *testing.T) {
 		err := os.WriteFile(invalidFile, []byte(content), 0644)
 		require.NoError(t, err)
 
-		_, err = handler.ParseEvents(dir, timeFormat)
+		_, err = controller.ParseEvents(dir, timeFormat)
 		assert.Error(t, err, "Expected error for invalid event line")
 	})
 

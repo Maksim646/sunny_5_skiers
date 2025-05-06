@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Maksim646/sunny_5_skiers/internal/handler"
+	"github.com/Maksim646/sunny_5_skiers/internal/controller"
 	"github.com/Maksim646/sunny_5_skiers/model"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -46,7 +46,7 @@ func TestProcessEvents(t *testing.T) {
 
 		defer os.Remove(actualPath)
 
-		err := handler.ProcessEvents(events, actualPath, timeFormat)
+		err := controller.ProcessEvents(events, actualPath, timeFormat)
 		require.NoError(t, err)
 
 		actualContent, err := os.ReadFile(actualPath)
@@ -78,7 +78,7 @@ func TestProcessEvents(t *testing.T) {
 			{ID: 11, Competitor: 1, Time: baseTime.Add(100 * time.Second), ExtraParams: "Lost in the forest"},
 		}
 
-		err := handler.ProcessEvents(events, actualPath, timeFormat)
+		err := controller.ProcessEvents(events, actualPath, timeFormat)
 		require.NoError(t, err)
 
 		actualContent, err := os.ReadFile(actualPath)
@@ -135,7 +135,7 @@ func TestGenerateResultingTable(t *testing.T) {
 
 		defer os.Remove(actualPath)
 
-		err := handler.GenerateResultingTable(events, actualPath, "%02d:%02d:%02d.%03d", config, 5)
+		err := controller.GenerateResultingTable(events, actualPath, "%02d:%02d:%02d.%03d", config, 5)
 		require.NoError(t, err, "GenerateResultingTable returned error")
 
 		actualContent, err := os.ReadFile(actualPath)
@@ -168,7 +168,7 @@ func TestGenerateResultingTable(t *testing.T) {
 
 		defer os.Remove(actualPath)
 
-		err := handler.GenerateResultingTable(events, actualPath, "%02d:%02d:%02d.%03d", config, 5)
+		err := controller.GenerateResultingTable(events, actualPath, "%02d:%02d:%02d.%03d", config, 5)
 		require.NoError(t, err, "GenerateResultingTable returned error")
 
 		actualContent, err := os.ReadFile(actualPath)
@@ -204,7 +204,7 @@ func TestGenerateResultingTable(t *testing.T) {
 
 		defer os.Remove(actualPath)
 
-		err := handler.GenerateResultingTable(events, actualPath, "%02d:%02d:%02d.%03d", config, 5)
+		err := controller.GenerateResultingTable(events, actualPath, "%02d:%02d:%02d.%03d", config, 5)
 		require.NoError(t, err, "GenerateResultingTable returned error")
 
 		actualContent, err := os.ReadFile(actualPath)
