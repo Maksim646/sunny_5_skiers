@@ -52,7 +52,7 @@ type LapInfo struct {
 
 type CompetitorReport struct {
 	CompetitorID int
-	Status       string // "OK", "NotStarted", "NotFinished"
+	Status       string
 	TotalTime    time.Duration
 	Laps         []LapInfo
 	PenaltyLaps  []LapInfo
