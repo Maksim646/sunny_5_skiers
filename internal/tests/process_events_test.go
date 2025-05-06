@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Maksim646/sunny_5_skiers/handler"
+	"github.com/Maksim646/sunny_5_skiers/internal/handler"
 	"github.com/Maksim646/sunny_5_skiers/model"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

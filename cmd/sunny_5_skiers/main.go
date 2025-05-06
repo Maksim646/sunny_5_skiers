@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/Maksim646/sunny_5_skiers/config"
-	"github.com/Maksim646/sunny_5_skiers/handler"
+	"github.com/Maksim646/sunny_5_skiers/internal/handler"
 	logger "github.com/Maksim646/sunny_5_skiers/pkg"
 	"github.com/kelseyhightower/envconfig"
 	"go.uber.org/zap"
